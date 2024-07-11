@@ -1,0 +1,28 @@
+# Logs
+logs/
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Compiled source files
+*.class
+*.o
+*.so
+*.exe
+
+# Environment variables
+.env
+
+# IDE specific files
+.vscode/
+.idea/
+*.iml
+
+# Actual content
+posts/*.md
+static/img/*
+
+!static/img/
+!static/img/.gitkeep

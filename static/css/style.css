@@ -1,0 +1,62 @@
+body {
+    font-size: 1.4rem;
+    color: #333;
+    background-color: #EED;
+}
+
+.container {
+    max-width: 65%;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.container img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+header,
+footer {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    font-family: 'Segoe UI', 'San Francisco', 'Ubuntu', sans-serif;
+}
+
+footer,
+.post-body {
+    font-family: 'Noto Serif', 'Georgia', serif;
+}
+
+nav a,
+a {
+    margin: 0 10px;
+    text-decoration: underline;
+    /* Underlined links */
+    color: inherit;
+    /* Ensures links do not have a different color */
+    transition: color 0.3s;
+}
+
+/* Ensures visited links do not change color */
+a:visited {
+    color: inherit;
+}
+
+/* Dark mode styles */
+@media (prefers-color-scheme: dark) {
+    body {
+        color: #EED;
+        background-color: #111;
+    }
+
+    nav a,
+    a {
+        color: inherit;
+    }
+}
