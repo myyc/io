@@ -3,7 +3,7 @@
 <ul>
     {{ range . }}
     {{ if not .Draft }}
-    <li><a href="/post/{{ .Filename }}">{{ .Title }}</a> {{ .Date | FormatDate "2006-01-02" }}</li>
+    <li><a href="/post/{{ .Filename }}">{{ .Title }}</a><span>{{ .Date | FormatDate "2006-01-02" }}</span></li>
     {{ end }}
     {{ end }}
 </ul>

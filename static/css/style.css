@@ -18,6 +18,10 @@ body {
     margin-right: auto;
 }
 
+article div {
+    line-height: 1.5;
+}
+
 header,
 footer {
     text-align: center;
@@ -25,7 +29,7 @@ footer {
 }
 
 header h1 {
-    font-family: 'Segoe UI', 'San Francisco', 'Ubuntu', sans-serif;
+    font-family: 'Noto Serif', 'Georgia', serif;
 }
 
 footer,
@@ -33,19 +37,33 @@ footer,
     font-family: 'Noto Serif', 'Georgia', serif;
 }
 
-nav a,
 a {
-    margin: 0 10px;
-    text-decoration: underline;
-    /* Underlined links */
+    text-decoration: none;
     color: inherit;
-    /* Ensures links do not have a different color */
-    transition: color 0.3s;
 }
 
-/* Ensures visited links do not change color */
-a:visited {
-    color: inherit;
+/* List styles */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    padding: 10px 0;
+}
+
+li a {
+    font-family: 'Noto Serif', 'Georgia', serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+    display: block;
+}
+
+li span {
+    font-family: 'Noto Serif', 'Georgia', serif;
+    font-size: 0.9rem;
+    margin-top: 15px;
+    margin-left: 25px;
 }
 
 /* Dark mode styles */
@@ -53,10 +71,5 @@ a:visited {
     body {
         color: #EED;
         background-color: #111;
-    }
-
-    nav a,
-    a {
-        color: inherit;
     }
 }
