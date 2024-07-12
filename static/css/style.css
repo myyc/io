@@ -32,6 +32,13 @@ footer {
     margin-bottom: 20px;
 }
 
+hr {
+    border: none;
+    border-top: 1px solid #130205;
+    margin: 40px auto 20px auto;
+    width: 50%;
+}
+
 header h1 {
     font-family: 'Noto Serif', 'Georgia', serif;
 }
@@ -75,5 +82,9 @@ li span {
     body {
         color: #F0E1CE;
         background-color: #111;
+    }
+
+    hr {
+        border-top: 1px solid #F0E1CE;
     }
 }
