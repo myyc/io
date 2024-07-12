@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/xml"
 	"fmt"
 	"html/template"
 	"log"
@@ -27,6 +28,31 @@ type Post struct {
 	Body     template.HTML
 }
 
+// RSS represents the RSS feed
+type RSS struct {
+	XMLName xml.Name `xml:"rss"`
+	Version string   `xml:"version,attr"`
+	Channel Channel  `xml:"channel"`
+}
+
+// Channel represents the RSS channel
+type Channel struct {
+	Title       string `xml:"title"`
+	Link        string `xml:"link"`
+	Description string `xml:"description"`
+	Language    string `xml:"language"`
+	Items       []Item `xml:"item"`
+}
+
+// Item represents an item in the RSS feed
+type Item struct {
+	Title       string `xml:"title"`
+	Link        string `xml:"link"`
+	Description string `xml:"description"`
+	PubDate     string `xml:"pubDate"`
+	GUID        string `xml:"guid"`
+}
+
 // FormatDate converts a date string in RFC3339 format to a formatted date string
 func FormatDate(format string, dateStr string) string {
 	// Parse the date string in RFC3339 format
@@ -43,6 +69,57 @@ func FormatDate(format string, dateStr string) string {
 // Create a new template.FuncMap and add the FormatDate function
 var funcMap = template.FuncMap{
 	"FormatDate": FormatDate,
+}
+
+// RSSHandler generates the RSS feed
+func RSSHandler(w http.ResponseWriter, r *http.Request) {
+	posts, err := GetAllPosts()
+	if err != nil {
+		log.Printf("Error getting all posts: %v", err)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	// Filter out drafts
+	var rssItems []Item
+	for _, post := range posts {
+		if !post.Draft {
+			// Extract the first two paragraphs
+			paragraphs := strings.Split(string(post.Body), "</p>")
+			description := ""
+			for i, paragraph := range paragraphs {
+				if i < 2 {
+					description += paragraph + "</p>"
+				}
+			}
+
+			rssItems = append(rssItems, Item{
+				Title:       post.Title,
+				Link:        fmt.Sprintf("http://%s/post/%s", r.Host, post.Filename),
+				Description: description,
+				PubDate:     FormatDate(time.RFC1123, post.Date),
+				GUID:        post.Filename,
+			})
+		}
+	}
+
+	rssFeed := RSS{
+		Version: "2.0",
+		Channel: Channel{
+			Title:       "io.",
+			Link:        "http://io.myyc.dev",
+			Description: "io.myyc.dev",
+			Language:    "en-gb",
+			Items:       rssItems,
+		},
+	}
+
+	w.Header().Set("Content-Type", "text/xml")
+	w.Header().Set("Content-Disposition", "inline")
+	if err := xml.NewEncoder(w).Encode(rssFeed); err != nil {
+		log.Printf("Error encoding RSS feed: %v", err)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
 }
 
 // Updated GetAllPosts function
@@ -184,6 +261,7 @@ func main() {
 	r.HandleFunc("/", IndexHandler).Methods("GET")
 	r.HandleFunc("/post/{title}", PostHandler).Methods("GET")
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static/"))))
+	r.HandleFunc("/feed.xml", RSSHandler).Methods("GET") // Add this line
 
 	log.Println("Starting server on :8081")
 	if err := http.ListenAndServe(":8081", r); err != nil {
