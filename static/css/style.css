@@ -1,7 +1,7 @@
 body {
     font-size: 1.4rem;
-    color: #333;
-    background-color: #EED;
+    color: #130205;
+    background-color: #F0E1CE;
 }
 
 .container {
@@ -16,6 +16,10 @@ body {
     height: auto;
     margin-left: auto;
     margin-right: auto;
+}
+
+sup {
+    line-height: 0;
 }
 
 article div {
@@ -69,7 +73,7 @@ li span {
 /* Dark mode styles */
 @media (prefers-color-scheme: dark) {
     body {
-        color: #EED;
+        color: #F0E1CE;
         background-color: #111;
     }
 }
