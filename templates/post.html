@@ -1,7 +1,7 @@
 {{ define "content" }}
 <article>
-    <h2>{{ .Title }}</h2>
-    <p><small>{{ .Date | FormatDate "2006-01-02 15:04" }}</small></p>
-    <div>{{ .Body }}</div>
+    <h2>{{ .Post.Title }}</h2>
+    <p><small>{{ .Post.Date | FormatDate "2006-01-02 15:04" }}</small></p>
+    <div>{{ .Post.Body }}</div>
 </article>
 {{ end }}

@@ -1,5 +1,6 @@
 body {
     font-size: 1.4rem;
+    font-family: 'Noto Serif', 'Georgia', serif;
     color: #130205;
     background-color: #F0E1CE;
 }
@@ -54,23 +55,23 @@ a {
 }
 
 /* List styles */
-ul {
+ul.posts {
     list-style: none;
     padding: 0;
 }
 
-li {
+ul.posts li {
     padding: 10px 0;
 }
 
-li a {
+ul.posts li a {
     font-family: 'Noto Serif', 'Georgia', serif;
     font-size: 1.2rem;
     font-weight: bold;
     display: block;
 }
 
-li span {
+ul.posts li span {
     font-family: 'Noto Serif', 'Georgia', serif;
     font-size: 0.9rem;
     margin-top: 15px;

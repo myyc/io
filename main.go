@@ -66,9 +66,33 @@ func FormatDate(format string, dateStr string) string {
 	return t.Format(format)
 }
 
+// Trivia returns a random sentence from a list of trivia
+func Trivia() string {
+	trivia := []string{
+		"Your beloved ones love you",
+		"Your beloved ones don't love you",
+		"You will feel more intelligent",
+		"You will feel less intelligent",
+		"There is a heaven and you're not going",
+		"There is a heaven and you're going",
+		"There is no heaven but you're not going anyway",
+		"There is no heaven but you're going somewhere else",
+		"Your path to enlightenment is blocked by a cat",
+		"You will get arrested",
+		"Your loneliness will be cured",
+		"Your loneliness will be eternal",
+		"Your loneliness will be cured by a cat",
+		"Your loneliness will be eternal because of a cat",
+	}
+
+	// Return a random trivia
+	return trivia[time.Now().UnixNano()%int64(len(trivia))]
+}
+
 // Create a new template.FuncMap and add the FormatDate function
 var funcMap = template.FuncMap{
 	"FormatDate": FormatDate,
+	"Trivia":     Trivia,
 }
 
 // RSSHandler generates the RSS feed
@@ -222,7 +246,15 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err := tmpl.ExecuteTemplate(w, "layout.html", posts); err != nil {
+	data := struct {
+		IsHome bool
+		Posts  []Post
+	}{
+		IsHome: true,
+		Posts:  posts,
+	}
+
+	if err := tmpl.ExecuteTemplate(w, "layout.html", data); err != nil {
 		log.Printf("Error executing template: %v", err)
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
@@ -250,7 +282,15 @@ func PostHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err := tmpl.ExecuteTemplate(w, "layout.html", post); err != nil {
+	data := struct {
+		IsHome bool
+		Post   Post
+	}{
+		IsHome: false,
+		Post:   post,
+	}
+
+	if err := tmpl.ExecuteTemplate(w, "layout.html", data); err != nil {
 		log.Printf("Error executing template: %v", err)
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}

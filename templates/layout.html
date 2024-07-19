@@ -14,6 +14,9 @@
         <header>
             <a href="/">
                 <h1>io.</h1>
+                {{ if .IsHome }}
+                <h5>{{ Trivia }}</h5>
+                {{ end }}
             </a>
         </header>
         <main>
