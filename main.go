@@ -83,6 +83,18 @@ func Trivia() string {
 		"Your loneliness will be eternal",
 		"Your loneliness will be cured by a cat",
 		"Your loneliness will be eternal because of a cat",
+		"You will be reincarnated as a cat",
+		"You will be reincarnated as a cat and you will be lonely",
+		"You will be reincarnated as a cat and you will be loved",
+		"You will be reincarnated as a cat and you will be loved by a lonely person",
+		"You will be reincarnated as a cat and you will be loved by a lonely person who will be arrested",
+		"You will be reincarnated as a tree and you will live three thousand years",
+		"You will be reincarnated as a tree and you will be cut down",
+		"You will be reincarnated as a dog and someone will eat you",
+		"You will be reincarnated as a dog and you will eat someone",
+		"You will be reincarnated as a sea urchin",
+		"You will be reincarnated as a bacterium inside your own body",
+		"You will be reincarnated as a maggot who will eat your decaying body",
 	}
 
 	// Return a random trivia

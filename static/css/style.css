@@ -89,3 +89,26 @@ ul.posts li span {
         border-top: 1px solid #F0E1CE;
     }
 }
+
+/* Mobile styles */
+@media screen and (max-width: 768px) {
+
+    /* Reduce font size and tighten margins for mobile */
+    body {
+        font-size: 1rem;
+    }
+
+    .container {
+        max-width: 90%;
+        padding: 10px;
+        margin: 10px auto;
+    }
+
+    ul.posts li a {
+        font-size: 1rem;
+    }
+
+    hr {
+        margin: 20px auto 10px auto;
+    }
+}
